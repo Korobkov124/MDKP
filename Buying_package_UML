@@ -1,0 +1,27 @@
+@startuml
+
+actor client as "Клиент"
+
+boundary main_window as "Окно выбора действий"
+boundary package_list_window as "Окно списка путевок"
+boundary entering_package as "Подтверждение покупки"
+
+entity packages_bd as "БД путевок"
+
+control display_main_window as "Отобразить окно действий"
+control display_package_list_window as "Отобразить окно списка"
+control display_entering_package as "Отобразить окно подтверждения"
+
+client--main_window
+client--package_list_window
+client--entering_package
+
+main_window-->display_package_list_window
+display_package_list_window-->package_list_window
+display_package_list_window-->packages_bd
+package_list_window-->display_main_window : Нажата кнопка "Выйти"
+display_main_window-->main_window
+package_list_window-->display_entering_package : Нажата кнопка "Подтвердить"
+display_entering_package-->entering_package
+entering_package-->display_main_window : Нажата кнопка "Выйти"
+@enduml
