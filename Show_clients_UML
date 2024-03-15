@@ -1,0 +1,22 @@
+@startuml
+actor "Сотрудник" as Employee
+
+boundary "Окно Выбора\nДействия" as main_window
+boundary "Окно Списка Клиентов" as client_list_window
+
+entity "БД Клиентов" as clients_db
+
+control "Отобразить Окно\nСписка Клиентов" as display_client_list_window
+control "Отобразить Окно\nВыбора Действия" as display_main_window
+
+Employee -- main_window
+Employee -- client_list_window
+
+main_window --> display_client_list_window : Нажимает Кнопку\n''Посмотреть Клиентов''
+display_client_list_window --> clients_db : Загрузить\nДанные
+
+display_client_list_window --> client_list_window
+
+client_list_window --> display_main_window : Нажата Кнопка ''Выйти''
+display_main_window --> main_window
+@enduml
