@@ -1,0 +1,23 @@
+@startuml
+actor "Сотрудник"as employee
+
+boundary main_window as "Окно выбора действий"
+boundary change_packages as "Окно редактирования списка"
+
+entity packages_BD as "БД доступных\n путевок"
+
+control display_main_window as "Отобразить окно выбора"
+control display_change_packages_window as "Отобразить окно\n доступных путевок"
+control add_package as "Изменить путевку"
+
+employee--main_window
+employee--change_packages
+
+main_window-->display_change_packages_window
+display_change_packages_window-->packages_BD : Загрузка данных
+display_change_packages_window-->change_packages
+change_packages-->add_package
+add_package-->packages_BD
+change_packages-->display_main_window : Нажата кнопка\n"Выйти"
+display_main_window-->main_window
+@enduml
