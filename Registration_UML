@@ -1,0 +1,25 @@
+@startuml
+
+actor user as "Пользователь"
+
+boundary registration as "Окно регистрации"
+boundary autorisation as "Окно авторизации"
+
+control display_main as "Отобразить окно выбора" 
+control display_main1 as "Отобразить окно выбора" #red
+control display_error as "Отобразить ошибку" #red
+
+entity users_BD as "БД пользователей"
+
+user -- registration
+user -- autorisation
+
+registration --> display_main
+registration --> display_main1 : Нажата кнопка\n''Выйти''
+display_main1 --> autorisation
+display_main --> users_BD
+registration --> display_error : Введены\nнеккоректные\nданные
+display_error --> registration
+display_main --> autorisation : Данные занесены в БД\nПовторная аутентификация
+
+@enduml
