@@ -1,22 +1,23 @@
 @startuml
-actor "Администратор" as admin
 
-boundary "Окно Выбора\nДействия" as main_window
-boundary "Окно Списка Клиентов" as client_list_window
+actor user as "Пользователь"
 
-entity "БД Клиентов" as clients_db
+boundary main_window as "Окно авторизации"
+boundary your_moves as "Окно выбора действий"
 
-control "Отобразить Окно\nСписка Клиентов" as display_client_list_window
-control "Отобразить Окно\nВыбора Действия" as display_main_window
+control autorisation as "Авторизация пользователя"
+control error as "Ошибка - пользователь\nне найден" #red
 
-admin -- main_window
-admin -- client_list_window
+entity employees_BD as "БД сотрудников"
+entity users_BD as "БД пользователей"
 
-main_window --> display_client_list_window : Нажимает Кнопку\n''Посмотреть Клиентов''
-display_client_list_window --> clients_db : Загрузить\nДанные
+user -- main_window
 
-display_client_list_window --> client_list_window
+main_window --> autorisation : Нажата кнопка\n''Авторизоваться''
+autorisation --> employees_BD
+autorisation --> error : Пользователь\n не авторизован
+autorisation --> your_moves
+autorisation --> users_BD
+error --> main_window
 
-client_list_window --> display_main_window : Нажата Кнопка ''Выйти''
-display_main_window --> main_window
 @enduml
