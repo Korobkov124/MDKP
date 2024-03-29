@@ -1,4 +1,5 @@
 @startuml
+
 actor "Администратор" as admin
 
 boundary main_window as "Окно выбора действий"
@@ -7,18 +8,22 @@ boundary change_employees as "Редактировать сотрудников"
 entity employees_bd as "БД сотрудников"
 
 control add_employee as "Удалить сотрудника"
-control display_main as "Отобразить окно выбора"
+control display_main as "Отобразить окно выбора" #red
 control display_changelist as "Отобразить окно редактирования"
+control display_error as "Отобразить ошибку" #red
 
-admin--change_employees
-admin--main_window
+admin -- change_employees
+admin -- main_window
 
-main_window-->display_changelist
-display_changelist-->employees_bd : Загрузка данных
-display_changelist-->change_employees
-change_employees-->add_employee
-add_employee-->employees_bd
+main_window --> display_changelist
+display_changelist --> employees_bd : Загрузка данных
+display_changelist --> change_employees
+display_changelist --> display_error : БД пуста
+display_error --> main_window
+change_employees --> add_employee
+add_employee --> employees_bd
 
-change_employees-->display_main : Нажата кнопка "Выйти"
-display_main-->main_window
+change_employees --> display_main : Нажата кнопка\n''Выйти''
+display_main --> main_window
+
 @enduml
