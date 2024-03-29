@@ -7,15 +7,19 @@ boundary buyes_list as "Окно просмотра покупок"
 
 entity buyed_packeges_bd as "БД купленных путевок"
 
-control display_main_window as "Отобразить окно выбора"
+control display_main_window as "Отобразить окно выбора" #red
 control display_buyes_list as "Отобразить окно просмотра"
+control display_error as "Отобразить ошибку" #red
 
-employee--main_window
-employee--buyes_list
+employee -- main_window
+employee -- buyes_list
 
-main_window-->display_buyes_list
-display_buyes_list-->buyed_packeges_bd : Загрузка\n данных
-display_buyes_list-->buyes_list
-buyes_list-->display_main_window : Нажата кнопка\n "Выйти"
-display_main_window-->main_window
+main_window --> display_buyes_list
+display_buyes_list --> buyed_packeges_bd : Загрузка\nданных
+display_buyes_list --> display_error : БД пуста
+display_error --> main_window
+display_buyes_list --> buyes_list
+buyes_list --> display_main_window : Нажата кнопка\n''Выйти''
+display_main_window --> main_window
+
 @enduml
