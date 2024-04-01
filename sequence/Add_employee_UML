@@ -1,0 +1,37 @@
+@startuml Add_employee_UML
+
+actor "Администратор" as admin
+
+boundary main_window as "Окно\nвыбора действий"
+boundary change_employees as "Окно\nредактировать сотрудников"
+
+entity employees_bd as "БД сотрудников"
+
+control display_error as "Ошибка" #red
+
+
+admin -> main_window : Нажимает кнопку ''Сотрудники''
+
+main_window -> change_employees : Отобразить
+change_employees -> employees_bd : Загрузка данных
+admin -> change_employees : Ввод данных
+admin -> change_employees : Нажата кнопка ''Добавить''
+
+alt Данные введены некорректно
+    change_employees -> display_error : Отобразить
+    display_error --> admin : Возврат
+
+else Данные введены корректно
+    change_employees -> employees_bd : Добавить сотрудника
+    employees_bd --> change_employees : Возврат ОК
+end 
+
+opt
+    admin -> change_employees : Нажата кнопка\n''Выйти''
+    change_employees -> main_window : Отобразить окно выбора
+    main_window --> admin : Возврат
+    
+
+end
+
+@enduml
