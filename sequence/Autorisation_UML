@@ -1,0 +1,30 @@
+@startuml Autorisation_UML
+
+actor user as "Пользователь"
+
+boundary main_window as "Окно авторизации"
+boundary your_moves as "Окно выбора действий"
+
+control error as "Ошибка - пользователь\nне найден" #red
+
+entity employees_BD as "БД сотрудников"
+entity users_BD as "БД пользователей"
+
+user -> main_window : Нажата кнопка\n''Авторизоваться''
+
+main_window -> employees_BD : Поиск сотрудника в БД
+main_window -> users_BD : Поиск пользователя в БД
+
+main_window -> main_window : Обработка результата
+
+alt Учетная запись найдена
+    main_window -> your_moves : Отобразить
+    your_moves --> user : Возврат
+
+else Не найдена
+    main_window -> error : Отобразить
+    error --> user : Возврат
+
+end
+
+@enduml
