@@ -1,0 +1,33 @@
+@startuml Add_packeges
+
+actor employee as "Сотрудник"
+
+boundary main_window as "Окно выбора действий"
+boundary change_packeges as "Окно редактирования списка"
+
+entity packages_BD as "БД доступных\nпутевок"
+
+control error as "Ошибка" #red
+
+employee -> main_window : Нажимает кнопку\n''Редактировать списокпутевок''
+
+main_window -> change_packeges : Отобразить
+change_packeges -> packages_BD : Загрузка данных
+employee -> change_packeges : Ввод данных
+employee -> change_packeges : Нажата кнопка ''Добавить''
+
+alt Данные введены некорректно
+    change_packeges -> error : Отобразить ошибку
+    error -> employee : Возврат
+else Данные введены корректно
+    change_packeges -> packages_BD : Загрузка новой путевки
+    packages_BD --> change_packeges : Возврат
+end
+
+opt Нажата кнопка ''Выйти''
+    employee -> change_packeges : Нажата кнопка ''Выйти''
+    change_packeges -> main_window : Отобразить окно выбора
+    main_window --> employee : Возврат
+end
+
+@enduml
