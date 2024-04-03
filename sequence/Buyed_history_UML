@@ -1,0 +1,30 @@
+@startuml Buyed_history
+
+actor employee as "Сотрудник"
+
+boundary main_window as "Окно выбора действий"
+boundary buyes_list as "Окно просмотра покупок"
+
+entity buyed_packages_BD as "БД купленных путевок"
+
+control error as "Ошибка" #red
+
+employee -> main_window : Нажимает кнопку ''Просмотреть историю покупок''
+
+main_window -> buyes_list : Отобразить
+buyes_list -> buyed_packages_BD : Загрузка данных
+
+alt БД пуста
+    buyes_list -> error : Отобразить
+    error --> employee : Возврат
+else БД не пуста
+    buyes_list --> employee : Отобразить данные из БД
+end
+
+opt Нажата кнопка''Выйти''
+    employee -> buyes_list : Нажата кнопка''Выйти''
+    buyes_list -> main_window : Отобразить окно выбора
+    main_window --> employee : Возврат
+end
+  
+@enduml
