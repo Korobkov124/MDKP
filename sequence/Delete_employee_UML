@@ -1,0 +1,33 @@
+@startuml Delete_employee
+
+actor admin as "Администратор"
+
+boundary main_window as "Окно выбора действий"
+boundary change_employees as "Редактировать сотрудников"
+
+entity employees_bd as "БД сотрудников"
+
+control error as "Ошибка" #red
+
+admin -> main_window : Нажимает кнопку ''Редактировать сотрудников''
+
+main_window -> change_employees : Отобразить
+change_employees -> employees_bd : Загрузка данных
+admin -> change_employees : Ввод данных
+admin -> change_employees : Нажимает кнопку ''Удалить''
+
+alt Данные введены некорректно
+    change_employees -> error : Отобразить
+    error --> admin : Возврат
+else Данные введены корректно
+    change_employees -> employees_bd : Удалить сотрудника
+    employees_bd --> change_employees : Возврат
+end
+
+opt
+    admin -> change_employees : Нажата кнопка\n''Выйти''
+    change_employees -> main_window : Отобразить окно выбора
+    main_window --> admin : Возврат
+end
+
+@enduml
