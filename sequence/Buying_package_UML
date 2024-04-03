@@ -1,0 +1,46 @@
+@startuml Buying_package
+
+actor user as "Пользователь"
+
+boundary main_window as "Окно выбора действий"
+boundary package_list_window as "Окно списка путевок"
+boundary entering_package as "Подтверждение покупки"
+
+entity packages_bd as "БД путевок"
+entity buyed_packages_BD as "БД купленных путевок"
+
+control error as "Ошибка" #red
+
+user -> main_window : Нажимает кнопку\n''Купить путевку''
+
+main_window -> package_list_window : Отобразить
+package_list_window -> packages_bd : Загрузить данные
+
+alt БД пуста
+    package_list_window -> error : Отобразить ошибку
+    error -> main_window : Отобразить окно выбора
+    main_window --> user : Возврат
+else БД не пуста
+    user -> package_list_window : Выбирает путевки
+    user -> package_list_window : Нажимает кнопку\n''Подтвердить''
+    package_list_window -> entering_package : Отобразить
+    package_list_window -> buyed_packages_BD : Сохранить данные в БД\nкупленных путевок
+    user -> entering_package : Нажата кнопка ''Подтвердить''
+    entering_package -> main_window : Отобразить
+    main_window --> user : Возврат
+end
+
+alt Было выбрано больше путевок, чем есть в БД
+    user -> package_list_window : Выбирает путевки
+    user -> package_list_window : Нажимает кнопку\n''Подтвердить''
+    package_list_window -> error : Отобразить ошибку
+    error --> package_list_window : Возврат
+end
+
+opt Нажата кнопка ''Выйти''
+    user -> package_list_window : Нажата кнопка ''Выйти''
+    package_list_window -> main_window : Отобразить
+    main_window --> user : Возврат
+end
+
+@enduml
