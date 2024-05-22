@@ -6,6 +6,8 @@ Users_list::Users_list(QWidget *parent) :
     ui(new Ui::Users_list)
 {
     ui->setupUi(this);
+    m_clients = new clientsmodel();
+    ui->tableView->setModel(m_clients);
 }
 
 Users_list::~Users_list()

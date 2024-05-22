@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    UsingDataBase::DataBaseConnection();
 }
 
 MainWindow::~MainWindow()
@@ -32,37 +33,31 @@ void MainWindow::on_Autorisation_button_clicked()
 {
     QString login = ui->Email_field->text();
     QString password = ui->Password_field->text();
-    UsingDataBase object;
-    QString employee_role;
     if(login == "" && password == "")
     {
         QMessageBox::warning(this, "Warning", "Your login & password fields is empty");
         return;
     }
-    if (object.FindClient(login, password) == true)
+    if (UsingDataBase::FindUserRole(login, password) == "admin")
+    {
+        hide();
+        win_admin = new Admin_main(this);
+        win_admin -> show();
+        return;
+    }
+    if (UsingDataBase::FindUserRole(login, password) == "moder")
+    {
+        hide();
+        win_emp = new Employee_main(this);
+        win_emp -> show();
+        return;
+    }
+    if (UsingDataBase::FindUserRole(login, password) == "client")
     {
         hide();
         win_usr = new User_main(this);
         win_usr -> show();
         return;
-    }
-    else
-    {
-        employee_role = object.FindUserRole(login, password);
-        if (employee_role == "admin")
-        {
-            hide();
-            win_admin = new Admin_main(this);
-            win_admin -> show();
-            return;
-        }
-        if (employee_role == "moder")
-        {
-            hide();
-            win_emp = new Employee_main(this);
-            win_emp -> show();
-            return;
-        }
     }
     QMessageBox::warning(this, "Warning", "Your login & password fields is uncorrect");
 }

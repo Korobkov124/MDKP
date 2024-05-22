@@ -2,6 +2,7 @@
 #define CHANGE_PACKAGES_H
 
 #include <QMainWindow>
+#include "packagemodel.h"
 
 namespace Ui {
 class Change_packages;
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::Change_packages *ui;
+    packagemodel *m_package;
 };
 
 #endif // CHANGE_PACKAGES_H

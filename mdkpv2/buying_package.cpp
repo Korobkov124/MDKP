@@ -6,6 +6,8 @@ Buying_package::Buying_package(QWidget *parent) :
     ui(new Ui::Buying_package)
 {
     ui->setupUi(this);
+    m_package = new packagemodel();
+    ui->tableView->setModel(m_package);
 }
 
 Buying_package::~Buying_package()

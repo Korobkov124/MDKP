@@ -6,6 +6,8 @@ Change_packages::Change_packages(QWidget *parent) :
     ui(new Ui::Change_packages)
 {
     ui->setupUi(this);
+    m_package = new packagemodel();
+    ui->tableView->setModel(m_package);
 }
 
 Change_packages::~Change_packages()

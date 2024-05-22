@@ -7,20 +7,8 @@ Change_employes::Change_employes(QWidget *parent) :
     ui(new Ui::Change_employes)
 {
     ui->setupUi(this);
-    QSqlDatabase new_db = QSqlDatabase::addDatabase("QSQLITE");
-    new_db.setDatabaseName("./users_bd.db");
-    if (new_db.open())
-    {
-        qDebug() << "OPEN";
-    }
-    else
-    {
-        qDebug() << "NOT OPEN";
-    }
-    model = new QSqlTableModel(this, new_db);
-    model -> setTable("employees");
-    model -> select();
-    ui->tableView->setModel(model);
+    employee_model = new usermodel();
+    ui->tableView->setModel(employee_model);
 }
 
 Change_employes::~Change_employes()
@@ -36,18 +24,12 @@ void Change_employes::on_Autorisation_button_4_clicked()
 
 void Change_employes::on_Autorisation_button_clicked()
 {
-    model->insertRow(model->rowCount());
+
 }
 
 
 void Change_employes::on_Autorisation_button_2_clicked()
 {
-    model->removeRow(row);
-}
 
-
-void Change_employes::on_tableView_clicked(const QModelIndex &index)
-{
-    row = index.row();
 }
 

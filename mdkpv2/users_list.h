@@ -2,6 +2,7 @@
 #define USERS_LIST_H
 
 #include <QMainWindow>
+#include "clientsmodel.h"
 
 namespace Ui {
 class Users_list;
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::Users_list *ui;
+    clientsmodel *m_clients;
 };
 
 #endif // USERS_LIST_H

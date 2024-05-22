@@ -2,7 +2,7 @@
 #define BUYING_PACKAGE_H
 
 #include <QMainWindow>
-
+#include "packagemodel.h"
 namespace Ui {
 class Buying_package;
 }
@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::Buying_package *ui;
+    packagemodel *m_package;
 };
 
 #endif // BUYING_PACKAGE_H

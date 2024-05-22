@@ -15,13 +15,16 @@ SOURCES += \
     change_employes.cpp \
     change_info.cpp \
     change_packages.cpp \
+    clientsmodel.cpp \
     employee_main.cpp \
     employees_class.cpp \
     main.cpp \
     mainwindow.cpp \
+    packagemodel.cpp \
     registration.cpp \
     show_clients.cpp \
     user_main.cpp \
+    usermodel.cpp \
     users_list.cpp \
     usingdatabase.cpp
 
@@ -32,12 +35,17 @@ HEADERS += \
     change_employes.h \
     change_info.h \
     change_packages.h \
+    clientsmodel.h \
     employee_main.h \
     employees_class.h \
     mainwindow.h \
+    packageclass.h \
+    packagemodel.h \
     registration.h \
     show_clients.h \
     user_main.h \
+    userclass.h \
+    usermodel.h \
     users_list.h \
     usingdatabase.h
 
