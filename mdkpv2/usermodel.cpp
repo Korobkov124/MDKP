@@ -64,3 +64,13 @@ QVariant usermodel::headerData(int section, Qt::Orientation orientation, int rol
     }
     return {};
 }
+
+bool usermodel::removeRow(int row, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row);
+    UsingDataBase Base;
+    Base.DeleteEmployee(m_users[row].Email);
+    m_users.removeAt(row);
+    endRemoveRows();
+    return true;
+}

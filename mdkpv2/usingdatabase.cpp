@@ -38,6 +38,15 @@ QVector<packageclass> UsingDataBase::getAllPackages()
     }
     return packages;
 }
+
+void UsingDataBase::DeleteEmployee(QString login)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Users WHERE Email = :login");
+    query.bindValue(":login", login);
+    query.exec();
+}
+
 QString UsingDataBase::FindUserRole(QString login, QString password)
 {
     QSqlQuery query;

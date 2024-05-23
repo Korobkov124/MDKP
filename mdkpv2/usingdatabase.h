@@ -19,6 +19,7 @@ public:
     static QVector<UsersClass> GetAllClients();
     static void DataBaseConnection();
     static QVector<packageclass> getAllPackages();
+    static void DeleteEmployee(QString login);
 };
 
 #endif // USINGDATABASE_H

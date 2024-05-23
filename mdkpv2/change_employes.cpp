@@ -30,6 +30,14 @@ void Change_employes::on_Autorisation_button_clicked()
 
 void Change_employes::on_Autorisation_button_2_clicked()
 {
-
+    QModelIndexList selectedRows = ui->tableView->selectionModel()->selectedRows();
+    if (!selectedRows.isEmpty())
+    {
+        int row = selectedRows.at(0).row();
+        if (employee_model->removeRow(row, QModelIndex()))
+        {
+            ui->tableView->update();
+        }
+    }
 }
 
