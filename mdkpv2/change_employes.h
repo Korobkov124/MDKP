@@ -22,7 +22,7 @@ public:
 private slots:
     void on_Autorisation_button_4_clicked();
 
-    void on_Autorisation_button_clicked();
+    void on_Add_button_clicked();
 
     void on_Autorisation_button_2_clicked();
 

@@ -26,12 +26,23 @@ void Change_employes::on_Autorisation_button_4_clicked()
 }
 
 
-void Change_employes::on_Autorisation_button_clicked()
+void Change_employes::on_Add_button_clicked()
 {
     QString line = ui->lineEdit_3->text();
     UsersClass user = user.getUserFromString(line);
-    UsingDataBase::takeUserToDB(user);
-    ui->tableView->update();
+    if(UsingDataBase::takeUserToDB(user))
+    {
+        int row = employee_model->rowCount(QModelIndex());
+        employee_model->insertRow(row, QModelIndex());
+        employee_model->setData(employee_model->index(row, 0), user.Name);
+        employee_model->setData(employee_model->index(row, 1), user.Email);
+        employee_model->setData(employee_model->index(row, 2), user.Phone);
+        employee_model->setData(employee_model->index(row, 3), user.Password);
+        employee_model->setData(employee_model->index(row, 4), user.Role);
+        employee_model->submit();
+        ui->tableView->viewport()->update();
+        ui->tableView->reset();
+    }
 }
 
 
