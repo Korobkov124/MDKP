@@ -24,6 +24,7 @@ SOURCES += \
     registration.cpp \
     show_clients.cpp \
     user_main.cpp \
+    userclass.cpp \
     usermodel.cpp \
     users_list.cpp \
     usingdatabase.cpp

@@ -1,6 +1,10 @@
 #include "change_employes.h"
 #include "ui_change_employes.h"
 #include "mainwindow.h"
+#include "userclass.h"
+#include "usingdatabase.h"
+#include <QMessageBox>
+#include <QString>
 
 Change_employes::Change_employes(QWidget *parent) :
     QMainWindow(parent),
@@ -24,7 +28,10 @@ void Change_employes::on_Autorisation_button_4_clicked()
 
 void Change_employes::on_Autorisation_button_clicked()
 {
-
+    QString line = ui->lineEdit_3->text();
+    UsersClass user = user.getUserFromString(line);
+    UsingDataBase::takeUserToDB(user);
+    ui->tableView->update();
 }
 
 
@@ -38,6 +45,10 @@ void Change_employes::on_Autorisation_button_2_clicked()
         {
             ui->tableView->update();
         }
+    }
+    else
+    {
+        QMessageBox::warning(this, "Warning", "Select the entire row!");
     }
 }
 

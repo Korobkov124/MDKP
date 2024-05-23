@@ -10,6 +10,7 @@ public:
     QString Phone;
     QString Password;
     QString Role;
+    static UsersClass getUserFromString(QString line);
 };
 
 #endif // USERSCLASS_H

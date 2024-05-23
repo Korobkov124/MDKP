@@ -47,6 +47,18 @@ void UsingDataBase::DeleteEmployee(QString login)
     query.exec();
 }
 
+void UsingDataBase::takeUserToDB(UsersClass object)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Users VALUES(:Name, :Email, :Phone, :Password, :Role)");
+    query.bindValue(":Name", object.Name);
+    query.bindValue(":Email", object.Email);
+    query.bindValue(":Phone", object.Phone);
+    query.bindValue(":Password", object.Password);
+    query.bindValue(":Role", object.Role);
+    query.exec();
+}
+
 QString UsingDataBase::FindUserRole(QString login, QString password)
 {
     QSqlQuery query;

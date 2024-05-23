@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="Autorisation_button_3">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>450</x>
       <y>480</y>
-      <width>121</width>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
@@ -57,7 +57,7 @@
      <rect>
       <x>10</x>
       <y>480</y>
-      <width>381</width>
+      <width>431</width>
       <height>41</height>
      </rect>
     </property>
@@ -104,9 +104,9 @@
    <widget class="QPushButton" name="Autorisation_button">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>450</x>
       <y>300</y>
-      <width>511</width>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
@@ -159,6 +159,16 @@
       <y>50</y>
       <width>511</width>
       <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>300</y>
+      <width>431</width>
+      <height>41</height>
      </rect>
     </property>
    </widget>
