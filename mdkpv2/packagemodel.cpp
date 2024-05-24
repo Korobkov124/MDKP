@@ -17,6 +17,16 @@ int packagemodel::columnCount(const QModelIndex &parent) const
     return 6;
 }
 
+bool packagemodel::removeRow(int row, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row);
+    UsingDataBase Base;
+    Base.DeletePackage(m_packages[row].ID);
+    m_packages.removeAt(row);
+    endRemoveRows();
+    return true;
+}
+
 QVariant packagemodel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {

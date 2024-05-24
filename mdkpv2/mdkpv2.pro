@@ -20,6 +20,7 @@ SOURCES += \
     employees_class.cpp \
     main.cpp \
     mainwindow.cpp \
+    packageclass.cpp \
     packagemodel.cpp \
     registration.cpp \
     show_clients.cpp \

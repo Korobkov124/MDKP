@@ -20,7 +20,9 @@ public:
     static void DataBaseConnection();
     static QVector<packageclass> getAllPackages();
     static void DeleteEmployee(QString login);
+    static void DeletePackage(int ID);
     static bool takeUserToDB(UsersClass object);
+    static bool takePackageToDB(packageclass object);
 };
 
 #endif // USINGDATABASE_H

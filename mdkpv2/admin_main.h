@@ -39,6 +39,7 @@ private:
     Show_clients *shw_usr;
     Users_list *usr_list;
     Change_employes *chg_emp;
+    UsersClass admin;
 };
 
 #endif // ADMIN_MAIN_H

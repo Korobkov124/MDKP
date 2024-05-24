@@ -42,6 +42,8 @@ void MainWindow::on_Autorisation_button_clicked()
     {
         hide();
         win_admin = new Admin_main(this);
+        UsingDataBase admin;
+        admin.GetUserFromDB(login, password);
         win_admin -> show();
         return;
     }

@@ -20,7 +20,7 @@ Change_employes::~Change_employes()
     delete ui;
 }
 
-void Change_employes::on_Autorisation_button_4_clicked()
+void Change_employes::on_Quit_button_clicked()
 {
     close();
 }
@@ -29,24 +29,31 @@ void Change_employes::on_Autorisation_button_4_clicked()
 void Change_employes::on_Add_button_clicked()
 {
     QString line = ui->lineEdit_3->text();
-    UsersClass user = user.getUserFromString(line);
-    if(UsingDataBase::takeUserToDB(user))
+    if (line == "")
     {
-        int row = employee_model->rowCount(QModelIndex());
-        employee_model->insertRow(row, QModelIndex());
-        employee_model->setData(employee_model->index(row, 0), user.Name);
-        employee_model->setData(employee_model->index(row, 1), user.Email);
-        employee_model->setData(employee_model->index(row, 2), user.Phone);
-        employee_model->setData(employee_model->index(row, 3), user.Password);
-        employee_model->setData(employee_model->index(row, 4), user.Role);
-        employee_model->submit();
-        ui->tableView->viewport()->update();
-        ui->tableView->reset();
+        QMessageBox::warning(this, "Warning", "Your field is empty!");
+    }
+    else
+    {
+        UsersClass user = user.getUserFromString(line);
+        if(UsingDataBase::takeUserToDB(user))
+        {
+            int row = employee_model->rowCount(QModelIndex());
+            employee_model->insertRow(row, QModelIndex());
+            employee_model->setData(employee_model->index(row, 0), user.Name);
+            employee_model->setData(employee_model->index(row, 1), user.Email);
+            employee_model->setData(employee_model->index(row, 2), user.Phone);
+            employee_model->setData(employee_model->index(row, 3), user.Password);
+            employee_model->setData(employee_model->index(row, 4), user.Role);
+            employee_model->submit();
+            ui->tableView->viewport()->update();
+            ui->tableView->reset();
+        }
     }
 }
 
 
-void Change_employes::on_Autorisation_button_2_clicked()
+void Change_employes::on_Delete_button_clicked()
 {
     QModelIndexList selectedRows = ui->tableView->selectionModel()->selectedRows();
     if (!selectedRows.isEmpty())

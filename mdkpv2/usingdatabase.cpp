@@ -47,6 +47,14 @@ void UsingDataBase::DeleteEmployee(QString login)
     query.exec();
 }
 
+void UsingDataBase::DeletePackage(int ID)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Packages WHERE ID = :ID");
+    query.bindValue(":ID", ID);
+    query.exec();
+}
+
 bool UsingDataBase::takeUserToDB(UsersClass object)
 {
     QSqlQuery query;
@@ -56,6 +64,24 @@ bool UsingDataBase::takeUserToDB(UsersClass object)
     query.bindValue(":Phone", object.Phone);
     query.bindValue(":Password", object.Password);
     query.bindValue(":Role", object.Role);
+    query.exec();
+    query.finish();
+    if(true)
+    {
+        return true;
+    }
+}
+
+bool UsingDataBase::takePackageToDB(packageclass object)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Packages VALUES(:Country_name, :Hotel_name, :Cost_of_week, :Week_cast, :Packages_cast, :ID)");
+    query.bindValue(":Country_name", object.Country_name);
+    query.bindValue(":Hotel_name", object.Hotel_name);
+    query.bindValue(":Cost_of_week", object.Cost_for_week);
+    query.bindValue(":Week_cast", object.Week_cast);
+    query.bindValue(":Packages_cast", object.Package_cast);
+    query.bindValue(":ID", object.ID);
     query.exec();
     query.finish();
     if(true)

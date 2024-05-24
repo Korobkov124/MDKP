@@ -17,7 +17,11 @@ public:
     ~Change_packages();
 
 private slots:
-    void on_Autorisation_button_4_clicked();
+    void on_Quit_button_clicked();
+
+    void on_Add_button_clicked();
+
+    void on_Delete_button_clicked();
 
 private:
     Ui::Change_packages *ui;

@@ -7,18 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>532</width>
-    <height>630</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="Autorisation_button_3">
+   <widget class="QPushButton" name="Change_button">
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>480</y>
+      <y>420</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -33,12 +33,12 @@
      <string>Change</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Autorisation_button_4">
+   <widget class="QPushButton" name="Quit_button">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>540</y>
-      <width>511</width>
+      <y>480</y>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
@@ -56,36 +56,10 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>480</y>
+      <y>420</y>
       <width>431</width>
       <height>41</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>260</y>
-      <width>511</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Add employee&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>440</y>
-      <width>511</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Change employee&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -120,11 +94,11 @@
      <string>Add</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Autorisation_button_2">
+   <widget class="QPushButton" name="Delete_button">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>390</y>
+      <y>360</y>
       <width>511</width>
       <height>41</height>
      </rect>
@@ -139,26 +113,13 @@
      <string>Delete</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>350</y>
-      <width>511</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Delete employee&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>50</y>
       <width>511</width>
-      <height>192</height>
+      <height>231</height>
      </rect>
     </property>
    </widget>

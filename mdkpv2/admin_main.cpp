@@ -10,6 +10,7 @@ Admin_main::Admin_main(QWidget *parent) :
     ui(new Ui::Admin_main)
 {
     ui->setupUi(this);
+    ui->label_2->setText("Admin " );
 }
 
 Admin_main::~Admin_main()

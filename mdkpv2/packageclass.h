@@ -11,6 +11,7 @@ public:
     int Week_cast;
     int Package_cast;
     int ID;
+    packageclass getPackageFromString(QString line);
 };
 
 #endif // PACKAGECLASS_H
