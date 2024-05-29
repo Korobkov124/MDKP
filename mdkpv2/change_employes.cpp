@@ -29,7 +29,7 @@ void Change_employes::on_Quit_button_clicked()
 
 void Change_employes::on_Add_button_clicked()
 {
-    QString line = ui->lineEdit_3->text();
+    QString line = ui->Name_field->text();
     if (line == "")
     {
         QMessageBox::warning(this, "Warning", "Your field is empty!");
