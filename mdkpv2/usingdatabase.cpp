@@ -65,11 +65,7 @@ bool UsingDataBase::takeUserToDB(UsersClass object)
     query.bindValue(":Password", object.Password);
     query.bindValue(":Role", object.Role);
     query.exec();
-    query.finish();
-    if(true)
-    {
-        return true;
-    }
+    return true;
 }
 
 bool UsingDataBase::takePackageToDB(packageclass object)
@@ -87,6 +83,22 @@ bool UsingDataBase::takePackageToDB(packageclass object)
     if(true)
     {
         return true;
+    }
+}
+
+bool UsingDataBase::getEmailFromDB(QString Email)
+{
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM Users WHERE Email = :Email");
+    query.bindValue(":Email", Email);
+    if (query.exec() && query.first())
+    {
+        int count = query.value(0).toInt();
+        return count > 0;
+    }
+    else
+    {
+        return false;
     }
 }
 

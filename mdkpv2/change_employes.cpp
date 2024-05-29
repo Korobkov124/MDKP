@@ -13,6 +13,7 @@ Change_employes::Change_employes(QWidget *parent) :
     ui->setupUi(this);
     employee_model = new usermodel();
     ui->tableView->setModel(employee_model);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
 }
 
 Change_employes::~Change_employes()

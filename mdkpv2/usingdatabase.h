@@ -23,6 +23,7 @@ public:
     static void DeletePackage(int ID);
     static bool takeUserToDB(UsersClass object);
     static bool takePackageToDB(packageclass object);
+    static bool getEmailFromDB(QString Email);
 };
 
 #endif // USINGDATABASE_H
