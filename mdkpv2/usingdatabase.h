@@ -24,6 +24,8 @@ public:
     static bool takeUserToDB(UsersClass object);
     static bool takePackageToDB(packageclass object);
     static bool getEmailFromDB(QString Email);
+    static UsersClass getUserWithEmail(QString Email);
+    static bool updateDataIntoUser(QString Email, QString NewName, QString NewEmail, QString NewPhone, QString NewPassword, QString NewRole);
 };
 
 #endif // USINGDATABASE_H

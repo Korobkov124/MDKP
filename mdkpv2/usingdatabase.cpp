@@ -102,6 +102,38 @@ bool UsingDataBase::getEmailFromDB(QString Email)
     }
 }
 
+UsersClass UsingDataBase::getUserWithEmail(QString Email)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Users WHERE Email = :Email");
+    query.bindValue(":Email", Email);
+    query.exec();
+    while(query.next())
+    {
+        UsersClass user;
+        user.Name = query.value(0).toString();
+        user.Email = query.value(1).toString();
+        user.Phone = query.value(2).toString();
+        user.Password = query.value(3).toString();
+        user.Role = query.value(4).toString();
+        return user;
+    }
+}
+
+bool UsingDataBase::updateDataIntoUser(QString Email, QString NewName, QString NewEmail, QString NewPhone, QString NewPassword, QString NewRole)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Users SET Name = :NewName, Email = :NewEmail, Phone = :NewPhone, Password = :NewPassword, Role = :NewRole WHERE Email = :Email");
+    query.bindValue(":Email", Email);
+    query.bindValue(":NewName", NewName);
+    query.bindValue(":NewEmail", NewEmail);
+    query.bindValue(":NewPhone", NewPhone);
+    query.bindValue(":NewPassword", NewPassword);
+    query.bindValue(":NewRole", NewRole);
+    query.exec();
+    return true;
+}
+
 QString UsingDataBase::FindUserRole(QString login, QString password)
 {
     QSqlQuery query;

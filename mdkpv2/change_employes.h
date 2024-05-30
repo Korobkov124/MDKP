@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include "usermodel.h"
+#include <QRegularExpressionValidator>
 
 namespace Ui {
 class Change_employes;
@@ -27,9 +28,18 @@ private slots:
     void on_Delete_button_clicked();
 
 
+    void on_Search_button_clicked();
+
+    void on_Change_button_clicked();
+
 private:
     Ui::Change_employes *ui;
     usermodel *employee_model;
+    QRegularExpressionValidator name_validator;
+    QRegularExpressionValidator email_validator;
+    QRegularExpressionValidator phone_validator;
+    QRegularExpressionValidator password_validator;
+    QRegularExpressionValidator role_validator;
 };
 
 #endif // CHANGE_EMPLOYES_H

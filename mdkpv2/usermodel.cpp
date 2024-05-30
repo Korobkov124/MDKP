@@ -74,3 +74,21 @@ bool usermodel::removeRow(int row, const QModelIndex &parent)
     endRemoveRows();
     return true;
 }
+
+bool usermodel::addUser(const UsersClass& newUser)
+{
+    beginInsertRows(QModelIndex(), m_users.size(), m_users.size());
+    m_users.append(newUser);
+    endInsertRows();
+    return true;
+}
+
+bool usermodel::updateData()
+{
+    beginResetModel();
+    UsingDataBase Base;
+    m_users = Base.GetAllEmployees();
+    endResetModel();
+    return true;
+}
+

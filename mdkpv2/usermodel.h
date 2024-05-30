@@ -15,7 +15,8 @@ public:
     bool removeRow(int row, const QModelIndex &parent);
     QVariant data(const QModelIndex &index, int role) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
-
+    bool addUser(const UsersClass& newUser);
+    bool updateData();
 private:
     QVector<UsersClass> m_users;
 };
