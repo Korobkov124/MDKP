@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "packagemodel.h"
+#include <QRegularExpressionValidator>
 
 namespace Ui {
 class Change_packages;
@@ -26,6 +27,12 @@ private slots:
 private:
     Ui::Change_packages *ui;
     packagemodel *m_package;
+    QRegularExpressionValidator country_validator;
+    QRegularExpressionValidator hotel_validator;
+    QRegularExpressionValidator cost_validator;
+    QRegularExpressionValidator weekcast_validator;
+    QRegularExpressionValidator packcast_validator;
+    QRegularExpressionValidator id_validator;
 };
 
 #endif // CHANGE_PACKAGES_H

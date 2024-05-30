@@ -4,13 +4,32 @@
 #include <QMessageBox>
 #include "usingdatabase.h"
 
+
 Change_packages::Change_packages(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Change_packages)
+    ui(new Ui::Change_packages),
+    country_validator(QRegularExpression("^[A-Z]{1}[a-z]{15}$")),
+    hotel_validator(QRegularExpression("^.{40}$")),
+    cost_validator(QRegularExpression("^(10000|[1-9]\\d{4}|1000000)$")),
+    weekcast_validator(QRegularExpression("^[1-4]$")),
+    packcast_validator(QRegularExpression("^(1|[1-9]\\d{2}|100)$")),
+    id_validator(QRegularExpression("^[0-9]{1,}$"))
 {
     ui->setupUi(this);
     m_package = new packagemodel();
     ui->tableView->setModel(m_package);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+    ui->Country_field->setValidator(&country_validator);
+    ui->Country_for_change_field->setValidator(&country_validator);
+    ui->Hotel_field->setValidator(&hotel_validator);
+    ui->Hotel_for_chang_field->setValidator(&hotel_validator);
+    ui->Cost_field->setValidator(&cost_validator);
+    ui->Cost_for_change_field->setValidator(&cost_validator);
+    ui->Week_cast_field->setValidator(&weekcast_validator);
+    ui->Weekcast_for_change_field->setValidator(&weekcast_validator);
+    ui->Package_cast_field->setValidator(&packcast_validator);
+    ui->Packcast_for_change_field_->setValidator(&packcast_validator);
+    ui->ID_for_change_field->setValidator(&id_validator);
 }
 
 Change_packages::~Change_packages()
@@ -26,29 +45,7 @@ void Change_packages::on_Quit_button_clicked()
 
 void Change_packages::on_Add_button_clicked()
 {
-    QString line = ui->lineEdit->text();
-    if (line == "")
-    {
-        QMessageBox::warning(this, "Warning", "Your field is empty!");
-    }
-    else
-    {
-        packageclass package = package.getPackageFromString(line);
-        if(UsingDataBase::takePackageToDB(package))
-        {
-            int row = m_package->rowCount(QModelIndex());
-            m_package->insertRow(row, QModelIndex());
-            m_package->setData(m_package->index(row, 0), package.Country_name);
-            m_package->setData(m_package->index(row, 1), package.Hotel_name);
-            m_package->setData(m_package->index(row, 2), package.Cost_for_week);
-            m_package->setData(m_package->index(row, 3), package.Week_cast);
-            m_package->setData(m_package->index(row, 4), package.Package_cast);
-            m_package->setData(m_package->index(row, 5), package.ID);
-            m_package->submit();
-            ui->tableView->viewport()->update();
-            ui->tableView->reset();
-        }
-    }
+
 }
 
 
