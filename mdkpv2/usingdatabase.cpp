@@ -134,6 +134,11 @@ bool UsingDataBase::updateDataIntoUser(QString Email, QString NewName, QString N
     return true;
 }
 
+int UsingDataBase::findBiggestIdOfPackage()
+{
+
+}
+
 QString UsingDataBase::FindUserRole(QString login, QString password)
 {
     QSqlQuery query;
