@@ -24,6 +24,10 @@ private slots:
 
     void on_Delete_button_clicked();
 
+    void on_Search_button_clicked();
+
+    void on_Change_button_clicked();
+
 private:
     Ui::Change_packages *ui;
     packagemodel *m_package;

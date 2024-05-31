@@ -3,6 +3,7 @@
 #include <QString>
 #include <QMessageBox>
 #include "usingdatabase.h"
+#include "packageclass.h"
 
 
 Change_packages::Change_packages(QWidget *parent) :
@@ -45,7 +46,25 @@ void Change_packages::on_Quit_button_clicked()
 
 void Change_packages::on_Add_button_clicked()
 {
-
+    packageclass package;
+    package.Country_name = ui->Country_field->text();
+    package.Hotel_name = ui->Hotel_field->text();
+    package.Cost_for_week = (ui->Cost_field->text()).toInt();
+    package.Week_cast = (ui->Week_cast_field->text()).toInt();
+    package.Package_cast = (ui->Package_cast_field->text()).toInt();
+    if (package.Country_name == "" || package.Hotel_name == "" || package.Cost_for_week == NULL || package.Week_cast == NULL || package.Cost_for_week == NULL)
+    {
+        QMessageBox::warning(this, "Warning", "Your fields is not correct!!!");
+    }
+    else
+    {
+        package.ID = (UsingDataBase::findBiggestIdOfPackage() + 1);
+        UsingDataBase::takePackageToDB(package);
+        if (m_package->addPackage(package))
+        {
+            ui->tableView->update();
+        }
+    }
 }
 
 
@@ -62,7 +81,42 @@ void Change_packages::on_Delete_button_clicked()
     }
     else
     {
-        QMessageBox::warning(this, "Warning", "Select the entire row!");
+        QMessageBox::warning(this, "Warning", "Select the row!");
+    }
+}
+
+
+void Change_packages::on_Search_button_clicked()
+{
+    if (((ui->ID_for_change_field->text()).toInt() != NULL) && (ui->ID_for_change_field->text().toInt() <= UsingDataBase::findBiggestIdOfPackage()))
+    {
+        packageclass package = UsingDataBase::findPackageWithID((ui->ID_for_change_field->text()).toInt());
+        ui->Country_for_change_field->setText(package.Country_name);
+        ui->Hotel_for_chang_field->setText(package.Hotel_name);
+        ui->Cost_for_change_field->setText(QString::number(package.Cost_for_week));
+        ui->Weekcast_for_change_field->setText(QString::number(package.Week_cast));
+        ui->Packcast_for_change_field_->setText(QString::number(package.Package_cast));
+    }
+    else
+    {
+        QMessageBox::warning(this, "Warning", "Your ID of package is not correct!!");
+    }
+}
+
+
+void Change_packages::on_Change_button_clicked()
+{
+    if ((UsingDataBase::findBiggestIdOfPackage() > ui->ID_for_change_field->text().toInt()) && (ui->ID_for_change_field->text().toInt() != NULL))
+    {
+        UsingDataBase::updateDataIntoPackage(ui->ID_for_change_field->text().toInt(), ui->Country_for_change_field->text(), ui->Hotel_for_chang_field->text(), ui->Cost_for_change_field->text().toInt(), ui->Weekcast_for_change_field->text().toInt(), ui->Packcast_for_change_field_->text().toInt());
+        if (m_package->updateData())
+        {
+            ui->tableView->update();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this, "Warning", "Your fields is not correct!!");
     }
 }
 

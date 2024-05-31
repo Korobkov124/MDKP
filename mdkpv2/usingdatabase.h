@@ -26,6 +26,9 @@ public:
     static bool getEmailFromDB(QString Email);
     static UsersClass getUserWithEmail(QString Email);
     static bool updateDataIntoUser(QString Email, QString NewName, QString NewEmail, QString NewPhone, QString NewPassword, QString NewRole);
+    static int findBiggestIdOfPackage();
+    static packageclass findPackageWithID(int ID);
+    static void updateDataIntoPackage(int ID, QString Country, QString Hotel, int Cost, int Weekcast, int Packcast);
 };
 
 #endif // USINGDATABASE_H

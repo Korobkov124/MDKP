@@ -86,7 +86,7 @@ void Change_employes::on_Delete_button_clicked()
 
 void Change_employes::on_Search_button_clicked()
 {
-    if (ui->Email_for_change_field->text() != "")
+    if ((ui->Email_for_change_field->text() != "") && (UsingDataBase::getEmailFromDB(ui->Email_for_change_field->text())))
     {
         UsersClass user = UsingDataBase::getUserWithEmail(ui->Email_for_change_field->text());
         ui->Name_for_change_field->setText(user.Name);

@@ -80,3 +80,20 @@ QVariant packagemodel::headerData(int section, Qt::Orientation orientation, int 
     }
     return {};
 }
+
+bool packagemodel::addPackage(const packageclass &newPackage)
+{
+    beginInsertRows(QModelIndex(), m_packages.size(), m_packages.size());
+    m_packages.append(newPackage);
+    endInsertRows();
+    return true;
+}
+
+bool packagemodel::updateData()
+{
+    beginResetModel();
+    UsingDataBase Base;
+    m_packages = Base.getAllPackages();
+    endResetModel();
+    return true;
+}

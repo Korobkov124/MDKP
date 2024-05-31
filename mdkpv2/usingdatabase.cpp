@@ -136,7 +136,49 @@ bool UsingDataBase::updateDataIntoUser(QString Email, QString NewName, QString N
 
 int UsingDataBase::findBiggestIdOfPackage()
 {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM Packages");
+    if(query.exec() && query.first())
+    {
+        int count = query.value(0).toInt();
+        return count;
+    }
+    else
+    {
+        return 1;
+    }
+}
 
+packageclass UsingDataBase::findPackageWithID(int ID)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Packages WHERE ID = :ID");
+    query.bindValue(":ID", ID);
+    query.exec();
+    while(query.next())
+    {
+        packageclass package;
+        package.Country_name = query.value(0).toString();
+        package.Hotel_name = query.value(1).toString();
+        package.Cost_for_week = query.value(2).toInt();
+        package.Week_cast = query.value(3).toInt();
+        package.Package_cast = query.value(4).toInt();
+        return package;
+    }
+
+}
+
+void UsingDataBase::updateDataIntoPackage(int ID, QString Country, QString Hotel, int Cost, int Weekcast, int Packcast)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Packages SET Country = :Country, Hotel = :Hotel, Cost_for_week = :Cost, Week_cast = :Weekcast, Packages_cast = :Packcast WHERE ID = :ID");
+    query.bindValue(":Country", Country);
+    query.bindValue(":Hotel", Hotel);
+    query.bindValue(":Cost", Cost);
+    query.bindValue(":Weekcast", Weekcast);
+    query.bindValue(":Packcast", Packcast);
+    query.bindValue(":ID", ID);
+    query.exec();
 }
 
 QString UsingDataBase::FindUserRole(QString login, QString password)
