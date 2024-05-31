@@ -17,6 +17,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     bool addUser(const UsersClass& newUser);
     bool updateData();
+
 private:
     QVector<UsersClass> m_users;
 };

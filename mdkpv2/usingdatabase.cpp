@@ -26,7 +26,7 @@ QVector<packageclass> UsingDataBase::getAllPackages()
     class packageclass package;
     QSqlQuery query;
     query.exec("SELECT * FROM Packages");
-    while (query.next())
+    while(query.next())
     {
         package.Country_name = query.value(0).toString();
         package.Hotel_name = query.value(1).toString();
@@ -165,7 +165,6 @@ packageclass UsingDataBase::findPackageWithID(int ID)
         package.Package_cast = query.value(4).toInt();
         return package;
     }
-
 }
 
 void UsingDataBase::updateDataIntoPackage(int ID, QString Country, QString Hotel, int Cost, int Weekcast, int Packcast)
@@ -179,6 +178,23 @@ void UsingDataBase::updateDataIntoPackage(int ID, QString Country, QString Hotel
     query.bindValue(":Packcast", Packcast);
     query.bindValue(":ID", ID);
     query.exec();
+}
+
+QVector<BuyedPackagesClass> UsingDataBase::getAllBuyedPackages()
+{
+    QVector<BuyedPackagesClass> BuyedPackages;
+    class BuyedPackagesClass package;
+    QSqlQuery query;
+    query.exec("SELECT * FROM Buyed_packages");
+    while(query.next())
+    {
+        package.ID = query.value(0).toInt();
+        package.ID_package = query.value(1).toInt();
+        package.Email_user = query.value(2).toString();
+        package.Quantity_of_packages = query.value(3).toInt();
+        BuyedPackages.append(package);
+    }
+    return BuyedPackages;
 }
 
 QString UsingDataBase::FindUserRole(QString login, QString password)

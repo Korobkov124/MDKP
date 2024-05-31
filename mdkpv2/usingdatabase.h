@@ -1,11 +1,13 @@
 #ifndef USINGDATABASE_H
 #define USINGDATABASE_H
+
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "userclass.h"
 #include <QObject>
 #include <QVector>
 #include "packageclass.h"
+#include "buyedpackageclass.h"
 
 class UsingDataBase : public QObject
 {
@@ -29,6 +31,7 @@ public:
     static int findBiggestIdOfPackage();
     static packageclass findPackageWithID(int ID);
     static void updateDataIntoPackage(int ID, QString Country, QString Hotel, int Cost, int Weekcast, int Packcast);
+    static QVector<BuyedPackageClass> getAllBuyedPackages();
 };
 
 #endif // USINGDATABASE_H

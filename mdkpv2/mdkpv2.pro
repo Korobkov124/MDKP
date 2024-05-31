@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     admin_main.cpp \
     buyed_history.cpp \
+    buyedpackageclass.cpp \
+    buyedpackagesmodel.cpp \
     buying_package.cpp \
     change_employes.cpp \
     change_info.cpp \
@@ -33,6 +35,8 @@ SOURCES += \
 HEADERS += \
     admin_main.h \
     buyed_history.h \
+    buyedpackageclass.h \
+    buyedpackagesmodel.h \
     buying_package.h \
     change_employes.h \
     change_info.h \
