@@ -3,11 +3,12 @@
 
 #include <QAbstractTableModel>
 #include "buyedpackageclass.h"
+#include <QString>
 
 class BuyedPackagesModel : public QAbstractTableModel
 {
 public:
-    explicit BuyedPackagesModel(QObject *parent = nullptr);
+    explicit BuyedPackagesModel(const QString &clientEmail, QObject *parent = nullptr);
 
 public:
     int rowCount(const QModelIndex &parent) const override;
@@ -17,6 +18,7 @@ public:
 
 private:
     QVector<BuyedPackageClass> m_BuyedPackages;
+    QString clientEmail;
 };
 
 #endif // BUYEDPACKAGESMODEL_H

@@ -31,7 +31,8 @@ public:
     static int findBiggestIdOfPackage();
     static packageclass findPackageWithID(int ID);
     static void updateDataIntoPackage(int ID, QString Country, QString Hotel, int Cost, int Weekcast, int Packcast);
-    static QVector<BuyedPackageClass> getAllBuyedPackages();
+    static QVector<BuyedPackageClass> getBuyedPackages(QString Email);
+    static QVector<QString> getCountryHotelTotalCost(int ID);
 };
 
 #endif // USINGDATABASE_H

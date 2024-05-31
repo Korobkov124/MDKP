@@ -1,10 +1,10 @@
 #include "buyedpackagesmodel.h"
 #include "usingdatabase.h"
 
-BuyedPackagesModel::BuyedPackagesModel(QObject *parent) : QAbstractTableModel{parent}
+BuyedPackagesModel::BuyedPackagesModel(const QString &clientEmail, QObject *parent) : QAbstractTableModel{parent}, clientEmail(clientEmail)
 {
     UsingDataBase Base;
-    m_BuyedPackages = Base.getAllBuyedPackages();
+    m_BuyedPackages = Base.getBuyedPackages(clientEmail);
 }
 
 int BuyedPackagesModel::rowCount(const QModelIndex &parent) const
@@ -32,6 +32,15 @@ QVariant BuyedPackagesModel::data(const QModelIndex &index, int role) const
         if (index.column() == 3) {
             return m_BuyedPackages[index.row()].Quantity_of_packages;
         }
+        if (index.column() == 4) {
+            return m_BuyedPackages[index.row()].Country_name;
+        }
+        if (index.column() == 5) {
+            return m_BuyedPackages[index.row()].Hotel_name;
+        }
+        if (index.column() == 6) {
+            return m_BuyedPackages[index.row()].TotalCost;
+        }
     }
     return {};
 }
@@ -54,6 +63,15 @@ QVariant BuyedPackagesModel::headerData(int section, Qt::Orientation orientation
         }
         if (section == 3) {
             return "Quantity_of_packages";
+        }
+        if (section == 4) {
+            return "Country_name";
+        }
+        if (section == 5) {
+            return "Hotel_name";
+        }
+        if (section == 6) {
+            return "Total_cost";
         }
     }
     return {};

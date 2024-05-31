@@ -180,21 +180,48 @@ void UsingDataBase::updateDataIntoPackage(int ID, QString Country, QString Hotel
     query.exec();
 }
 
-QVector<BuyedPackagesClass> UsingDataBase::getAllBuyedPackages()
+QVector<BuyedPackageClass> UsingDataBase::getBuyedPackages(QString Email)
 {
-    QVector<BuyedPackagesClass> BuyedPackages;
-    class BuyedPackagesClass package;
+    QVector<BuyedPackageClass> BuyedPackages;
+    class BuyedPackageClass package;
     QSqlQuery query;
-    query.exec("SELECT * FROM Buyed_packages");
+    query.prepare("SELECT * FROM Buyed_packages WHERE Email_user = :Email");
+    query.bindValue(":Email", Email);
+    query.exec();
     while(query.next())
     {
         package.ID = query.value(0).toInt();
         package.ID_package = query.value(1).toInt();
         package.Email_user = query.value(2).toString();
         package.Quantity_of_packages = query.value(3).toInt();
+        QVector<QString> params = UsingDataBase::getCountryHotelTotalCost(package.ID_package);
+        package.Country_name = params[0];
+        package.Hotel_name = params[1];
+        package.TotalCost = (params[2].toInt() * params[3].toInt() * package.Quantity_of_packages);
         BuyedPackages.append(package);
     }
     return BuyedPackages;
+}
+
+QVector<QString> UsingDataBase::getCountryHotelTotalCost(int ID)
+{
+    QSqlQuery query;
+    query.prepare("SELECT Country, Hotel, Cost_for_week, Week_cast FROM Packages WHERE ID = :ID");
+    query.bindValue(":ID", ID);
+    query.exec();
+    while(query.next())
+    {
+        QVector<QString> params;
+        QString Country = query.value(0).toString();
+        params.append(Country);
+        QString Hotel = query.value(1).toString();
+        params.append(Hotel);
+        int Cost_for_week = query.value(2).toInt();
+        params.append(QString::number(Cost_for_week));
+        int Week_cast = query.value(3).toInt();
+        params.append(QString::number(Week_cast));
+        return params;
+    }
 }
 
 QString UsingDataBase::FindUserRole(QString login, QString password)
