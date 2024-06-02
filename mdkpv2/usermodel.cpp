@@ -20,19 +20,19 @@ int usermodel::columnCount(const QModelIndex &parent) const
 QVariant usermodel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {
-        if (index.column() == 0) {
+        if (index.column() == 0 && m_users[index.row()].Display_mode == 1) {
             return m_users[index.row()].Name;
         }
-        if (index.column() == 1) {
+        if (index.column() == 1 && m_users[index.row()].Display_mode == 1) {
             return m_users[index.row()].Email;
         }
-        if (index.column() == 2) {
+        if (index.column() == 2 && m_users[index.row()].Display_mode == 1) {
             return m_users[index.row()].Phone;
         }
-        if (index.column() == 3) {
+        if (index.column() == 3 && m_users[index.row()].Display_mode == 1) {
             return m_users[index.row()].Password;
         }
-        if (index.column() == 4) {
+        if (index.column() == 4 && m_users[index.row()].Display_mode == 1) {
             return m_users[index.row()].Role;
         }
     }
@@ -79,6 +79,8 @@ bool usermodel::addUser(const UsersClass& newUser)
 {
     beginInsertRows(QModelIndex(), m_users.size(), m_users.size());
     m_users.append(newUser);
+    UsingDataBase Base;
+    m_users = Base.GetAllEmployees();
     endInsertRows();
     return true;
 }

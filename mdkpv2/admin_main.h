@@ -6,6 +6,7 @@
 #include "show_clients.h"
 #include "users_list.h"
 #include "change_employes.h"
+#include "userclass.h"
 
 namespace Ui {
 class Admin_main;
@@ -16,7 +17,7 @@ class Admin_main : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Admin_main(QWidget *parent = nullptr);
+    explicit Admin_main(const UsersClass &user, QWidget *parent = nullptr);
     ~Admin_main();
 
 private slots:

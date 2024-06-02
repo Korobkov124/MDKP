@@ -20,19 +20,19 @@ int clientsmodel::columnCount(const QModelIndex &parent) const
 QVariant clientsmodel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {
-        if (index.column() == 0) {
+        if (index.column() == 0 && m_clients[index.row()].Display_mode == 1) {
             return m_clients[index.row()].Name;
         }
-        if (index.column() == 1) {
+        if (index.column() == 1 && m_clients[index.row()].Display_mode == 1) {
             return m_clients[index.row()].Email;
         }
-        if (index.column() == 2) {
+        if (index.column() == 2 && m_clients[index.row()].Display_mode == 1) {
             return m_clients[index.row()].Phone;
         }
-        if (index.column() == 3) {
+        if (index.column() == 3 && m_clients[index.row()].Display_mode == 1) {
             return m_clients[index.row()].Password;
         }
-        if (index.column() == 4) {
+        if (index.column() == 4 && m_clients[index.row()].Display_mode == 1) {
             return m_clients[index.row()].Role;
         }
     }

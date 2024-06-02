@@ -89,11 +89,18 @@ void Change_employes::on_Search_button_clicked()
     if ((ui->Email_for_change_field->text() != "") && (UsingDataBase::getEmailFromDB(ui->Email_for_change_field->text())))
     {
         UsersClass user = UsingDataBase::getUserWithEmail(ui->Email_for_change_field->text());
-        ui->Name_for_change_field->setText(user.Name);
-        ui->Email_for_change_field_2->setText(user.Email);
-        ui->Phone_for_change_field->setText(user.Phone);
-        ui->Passsword_for_change_field->setText(user.Password);
-        ui->Role_for_change_field->setText(user.Role);
+        if (user.Display_mode == 1)
+        {
+            ui->Name_for_change_field->setText(user.Name);
+            ui->Email_for_change_field_2->setText(user.Email);
+            ui->Phone_for_change_field->setText(user.Phone);
+            ui->Passsword_for_change_field->setText(user.Password);
+            ui->Role_for_change_field->setText(user.Role);
+        }
+        else
+        {
+            QMessageBox::warning(this, "Warning", "Email is not correct!!");
+        }
     }
     else
     {

@@ -5,12 +5,12 @@
 #include "users_list.h"
 #include "change_employes.h"
 
-Admin_main::Admin_main(QWidget *parent) :
+Admin_main::Admin_main(const UsersClass &user, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Admin_main)
 {
     ui->setupUi(this);
-    ui->label_2->setText("Admin " );
+    ui->label_2->setText("Admin " + user.Name);
 }
 
 Admin_main::~Admin_main()

@@ -11,6 +11,7 @@ public:
     int Week_cast;
     int Package_cast;
     int ID;
+    int Display_mode;
     packageclass getPackageFromString(QString line);
 };
 

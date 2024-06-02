@@ -34,7 +34,11 @@ QVector<packageclass> UsingDataBase::getAllPackages()
         package.Week_cast = query.value(3).toInt();
         package.Package_cast = query.value(4).toInt();
         package.ID = query.value(5).toInt();
-        packages.append(package);
+        package.Display_mode = query.value(6).toInt();
+        if (package.Display_mode == 1)
+        {
+            packages.append(package);
+        }
     }
     return packages;
 }
@@ -42,7 +46,7 @@ QVector<packageclass> UsingDataBase::getAllPackages()
 void UsingDataBase::DeleteEmployee(QString login)
 {
     QSqlQuery query;
-    query.prepare("DELETE FROM Users WHERE Email = :login");
+    query.prepare("UPDATE Users SET Display_mode = 0 WHERE Email = :login");
     query.bindValue(":login", login);
     query.exec();
 }
@@ -50,7 +54,7 @@ void UsingDataBase::DeleteEmployee(QString login)
 void UsingDataBase::DeletePackage(int ID)
 {
     QSqlQuery query;
-    query.prepare("DELETE FROM Packages WHERE ID = :ID");
+    query.prepare("UPDATE Packages SET Display_mode = 0 WHERE ID = :ID");
     query.bindValue(":ID", ID);
     query.exec();
 }
@@ -58,7 +62,7 @@ void UsingDataBase::DeletePackage(int ID)
 bool UsingDataBase::takeUserToDB(UsersClass object)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO Users VALUES(:Name, :Email, :Phone, :Password, :Role)");
+    query.prepare("INSERT INTO Users VALUES(:Name, :Email, :Phone, :Password, :Role, 1)");
     query.bindValue(":Name", object.Name);
     query.bindValue(":Email", object.Email);
     query.bindValue(":Phone", object.Phone);
@@ -71,13 +75,14 @@ bool UsingDataBase::takeUserToDB(UsersClass object)
 bool UsingDataBase::takePackageToDB(packageclass object)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO Packages VALUES(:Country_name, :Hotel_name, :Cost_of_week, :Week_cast, :Packages_cast, :ID)");
+    query.prepare("INSERT INTO Packages VALUES(:Country_name, :Hotel_name, :Cost_of_week, :Week_cast, :Packages_cast, :ID, :Display_mode)");
     query.bindValue(":Country_name", object.Country_name);
     query.bindValue(":Hotel_name", object.Hotel_name);
     query.bindValue(":Cost_of_week", object.Cost_for_week);
     query.bindValue(":Week_cast", object.Week_cast);
     query.bindValue(":Packages_cast", object.Package_cast);
     query.bindValue(":ID", object.ID);
+    query.bindValue(":Display_mode", 1);
     query.exec();
     query.finish();
     if(true)
@@ -116,6 +121,7 @@ UsersClass UsingDataBase::getUserWithEmail(QString Email)
         user.Phone = query.value(2).toString();
         user.Password = query.value(3).toString();
         user.Role = query.value(4).toString();
+        user.Display_mode = query.value(5).toInt();
         return user;
     }
 }
@@ -224,10 +230,26 @@ QVector<QString> UsingDataBase::getCountryHotelTotalCost(int ID)
     }
 }
 
+bool UsingDataBase::getPasswordFromDB(QString Password)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Users WHERE Password = :Password");
+    query.bindValue(":Password", Password);
+    if (query.exec() && query.first())
+    {
+        int count = query.value(0).toInt();
+        return count > 0;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 QString UsingDataBase::FindUserRole(QString login, QString password)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Users WHERE Email = :login and Password = :password");
+    query.prepare("SELECT * FROM Users WHERE Email = :login and Password = :password and Display_mode = 1");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
     query.exec();
@@ -246,12 +268,13 @@ QString UsingDataBase::FindUserRole(QString login, QString password)
             return "client";
         }
     }
+    return "empty";
 }
 
 bool UsingDataBase::FindClient(QString login, QString password)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Users WHERE Email = :login and password = :password");
+    query.prepare("SELECT * FROM Users WHERE Email = :login and password = :password and Display_mode = 1");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
     query.exec();
@@ -264,7 +287,7 @@ bool UsingDataBase::FindClient(QString login, QString password)
 UsersClass UsingDataBase::GetUserFromDB(QString login, QString password)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Users WHERE Email = :login and password = :password");
+    query.prepare("SELECT * FROM Users WHERE Email = :login and password = :password and Display_mode = 1");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
     query.exec();
@@ -276,6 +299,7 @@ UsersClass UsingDataBase::GetUserFromDB(QString login, QString password)
         user.Phone = query.value(2).toString();
         user.Password = query.value(3).toString();
         user.Role = query.value(4).toString();
+        user.Display_mode = 1;
         return user;
     }
 }
@@ -285,7 +309,7 @@ QVector<UsersClass> UsingDataBase::GetAllEmployees()
     QVector<UsersClass> users;
     class UsersClass user;
     QSqlQuery query;
-    query.exec("SELECT * FROM Users WHERE Role = 'admin' OR Role = 'moder'");
+    query.exec("SELECT * FROM Users WHERE (Display_mode = 1 AND Role = 'admin') OR (Display_mode = 1 AND Role = 'moder')");
     while (query.next())
     {
         user.Name = query.value(0).toString();
@@ -293,6 +317,7 @@ QVector<UsersClass> UsingDataBase::GetAllEmployees()
         user.Phone = query.value(2).toString();
         user.Password = query.value(3).toString();
         user.Role = query.value(4).toString();
+        user.Display_mode = 1;
         users.append(user);
     }
     return users;
@@ -303,7 +328,7 @@ QVector<UsersClass> UsingDataBase::GetAllClients()
     QVector<UsersClass> users;
     class UsersClass user;
     QSqlQuery query;
-    query.exec("SELECT * FROM Users WHERE Role = 'client'");
+    query.exec("SELECT * FROM Users WHERE Role = 'client' and Display_mode = 1");
     while (query.next())
     {
         user.Name = query.value(0).toString();
@@ -311,6 +336,7 @@ QVector<UsersClass> UsingDataBase::GetAllClients()
         user.Phone = query.value(2).toString();
         user.Password = query.value(3).toString();
         user.Role = query.value(4).toString();
+        user.Display_mode = 1;
         users.append(user);
     }
     return users;

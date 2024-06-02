@@ -33,34 +33,46 @@ void MainWindow::on_Autorisation_button_clicked()
 {
     QString login = ui->Email_field->text();
     QString password = ui->Password_field->text();
-    if(login == "" && password == "")
+
+    if(login.isEmpty() || password.isEmpty())
     {
-        QMessageBox::warning(this, "Warning", "Your login & password fields is empty");
+        QMessageBox::warning(this, "Warning", "Your login & password fields are empty");
         return;
     }
-    if (UsingDataBase::FindUserRole(login, password) == "admin")
+    if ((!UsingDataBase::getEmailFromDB(login)) && (!UsingDataBase::getPasswordFromDB(password)))
     {
-        hide();
-        win_admin = new Admin_main(this);
-        UsingDataBase admin;
-        admin.GetUserFromDB(login, password);
-        win_admin -> show();
+        QMessageBox::warning(this, "Warning", "Incorrect login or password");
         return;
     }
-    if (UsingDataBase::FindUserRole(login, password) == "moder")
+    else
     {
-        hide();
-        win_emp = new Employee_main(this);
-        win_emp -> show();
-        return;
+        QString userRole = UsingDataBase::FindUserRole(login, password);
+        if(userRole == "empty")
+        {
+            QMessageBox::warning(this, "Warning", "Incorrect login or password");
+            return;
+        }
+        if (userRole == "admin")
+        {
+            hide();
+            UsersClass admin = UsingDataBase::GetUserFromDB(login, password);
+            win_admin = new Admin_main(admin);
+            win_admin->show();
+        }
+        else if (userRole == "moder")
+        {
+            hide();
+            UsersClass moder = UsingDataBase::GetUserFromDB(login, password);
+            win_emp = new Employee_main(this);
+            win_emp->show();
+        }
+        else if (userRole == "client")
+        {
+            hide();
+            UsersClass cleint = UsingDataBase::GetUserFromDB(login, password);
+            win_usr = new User_main(this);
+            win_usr->show();
+        }
     }
-    if (UsingDataBase::FindUserRole(login, password) == "client")
-    {
-        hide();
-        win_usr = new User_main(this);
-        win_usr -> show();
-        return;
-    }
-    QMessageBox::warning(this, "Warning", "Your login & password fields is uncorrect");
 }
 
