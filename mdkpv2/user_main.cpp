@@ -10,6 +10,7 @@ User_main::User_main(const UsersClass &client, QWidget *parent) :
 {
     ui->setupUi(this);
     ui->label_2->setText("Hello " + client.Name + "!");
+    Client = client;
 }
 
 User_main::~User_main()
@@ -40,7 +41,7 @@ void User_main::on_Show_button_clicked()
 
 void User_main::on_Change_button_clicked()
 {
-    chg_info = new Change_info(this);
+    chg_info = new Change_info(Client);
     chg_info -> show();
 }
 

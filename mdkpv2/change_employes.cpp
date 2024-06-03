@@ -10,8 +10,8 @@ Change_employes::Change_employes(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Change_employes),
     name_validator(QRegularExpression("^[A-Z]{1}[a-z]{15}$")),
-    phone_validator(QRegularExpression("^\\+\\d{1,1}\\(\\d{3,5}\\)\\d{2,7}$")),
     email_validator(QRegularExpression("^.{30}+@(mail\\.ru|outlook\\.com)$")),
+    phone_validator(QRegularExpression("^\\+\\d{1,1}\\(\\d{3,5}\\)\\d{2,7}$")),
     password_validator(QRegularExpression("^.{30}$")),
     role_validator(QRegularExpression("^(admin|moder)$"))
 {

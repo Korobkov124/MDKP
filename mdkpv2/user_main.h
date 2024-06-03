@@ -36,7 +36,7 @@ private:
     Buyed_history *buyed_hist;
     Buying_package *buying_pckg;
     Change_info *chg_info;
-    UsersClass client;
+    UsersClass Client;
 };
 
 #endif // USER_MAIN_H
