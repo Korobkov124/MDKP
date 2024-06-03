@@ -14,20 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>501</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Employee [EMPNAME][EMPNAME2]&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Autorisation_button_2">
+   <widget class="QPushButton" name="Check_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -46,7 +33,7 @@
      <string>Check history</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Autorisation_button_4">
+   <widget class="QPushButton" name="Quit_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -78,7 +65,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Touristic Firm&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Autorisation_button">
+   <widget class="QPushButton" name="Change_packs_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -97,7 +84,7 @@
      <string>Change packages</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Autorisation_button_3">
+   <widget class="QPushButton" name="Show_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -114,6 +101,23 @@
     </property>
     <property name="text">
      <string>Show clients</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>60</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 600 20pt &quot;Segoe UI&quot;;
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Moderator&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

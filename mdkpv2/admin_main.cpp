@@ -10,7 +10,7 @@ Admin_main::Admin_main(const UsersClass &user, QWidget *parent) :
     ui(new Ui::Admin_main)
 {
     ui->setupUi(this);
-    ui->label_2->setText("Admin " + user.Name);
+    ui->Name_label->setText("Admin " + user.Name);
 }
 
 Admin_main::~Admin_main()

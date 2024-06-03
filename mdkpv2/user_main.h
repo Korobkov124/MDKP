@@ -5,6 +5,7 @@
 #include "buyed_history.h"
 #include "buying_package.h"
 #include "change_info.h"
+#include "userclass.h"
 
 namespace Ui {
 class User_main;
@@ -15,17 +16,17 @@ class User_main : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit User_main(QWidget *parent = nullptr);
+    explicit User_main(const UsersClass &client, QWidget *parent = nullptr);
     ~User_main();
 
 private slots:
-    void on_Autorisation_button_4_clicked();
+    void on_Quit_button_clicked();
 
-    void on_Autorisation_button_2_clicked();
+    void on_Show_button_clicked();
 
-    void on_Autorisation_button_clicked();
+    void on_Change_button_clicked();
 
-    void on_Autorisation_button_3_clicked();
+    void on_History_button_clicked();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -35,6 +36,7 @@ private:
     Buyed_history *buyed_hist;
     Buying_package *buying_pckg;
     Change_info *chg_info;
+    UsersClass client;
 };
 
 #endif // USER_MAIN_H

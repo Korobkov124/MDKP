@@ -63,14 +63,14 @@ void MainWindow::on_Autorisation_button_clicked()
         {
             hide();
             UsersClass moder = UsingDataBase::GetUserFromDB(login, password);
-            win_emp = new Employee_main(this);
+            win_emp = new Employee_main(moder);
             win_emp->show();
         }
         else if (userRole == "client")
         {
             hide();
-            UsersClass cleint = UsingDataBase::GetUserFromDB(login, password);
-            win_usr = new User_main(this);
+            UsersClass client = UsingDataBase::GetUserFromDB(login, password);
+            win_usr = new User_main(client);
             win_usr->show();
         }
     }
