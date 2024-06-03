@@ -158,7 +158,7 @@ int UsingDataBase::findBiggestIdOfPackage()
 packageclass UsingDataBase::findPackageWithID(int ID)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Packages WHERE ID = :ID");
+    query.prepare("SELECT * FROM Packages WHERE ID = :ID AND Display_mode = 1");
     query.bindValue(":ID", ID);
     query.exec();
     while(query.next())
@@ -169,6 +169,7 @@ packageclass UsingDataBase::findPackageWithID(int ID)
         package.Cost_for_week = query.value(2).toInt();
         package.Week_cast = query.value(3).toInt();
         package.Package_cast = query.value(4).toInt();
+        package.ID = ID;
         return package;
     }
 }
@@ -243,6 +244,60 @@ bool UsingDataBase::getPasswordFromDB(QString Password)
     else
     {
         return false;
+    }
+}
+
+bool UsingDataBase::getPackageBuyed(int ID_package, QString Email_user, int Quantity_of_packages)
+{
+    QSqlQuery query;
+    packageclass package1 = UsingDataBase::findPackageWithID(ID_package);
+    if (package1.Package_cast > Quantity_of_packages)
+    {
+        int pack_diff = package1.Package_cast - Quantity_of_packages;
+        query.prepare("UPDATE Packages SET Packages_cast = :pack_diff WHERE ID = :ID_package");
+        query.bindValue(":pack_diff", pack_diff);
+        query.bindValue(":ID_package", ID_package);
+        query.exec();
+        QSqlQuery query1;
+        int buyed_package_id = (UsingDataBase::findBiggestIdOfBuyedPackage() + 1);
+        query1.prepare("INSERT INTO Buyed_packages VALUES(:buyed_package_id, :ID_package, :Email_user, :Quantity_of_packages)");
+        query1.bindValue(":buyed_package_id", buyed_package_id);
+        query1.bindValue(":ID_package", ID_package);
+        query1.bindValue(":Email_user", Email_user);
+        query1.bindValue(":Quantity_of_packages", Quantity_of_packages);
+        query1.exec();
+        return true;
+    }
+    if (package1.Package_cast == Quantity_of_packages)
+    {
+        query.prepare("UPDATE Packages SET Packages_cast = 0, Display_mode = 0 WHERE ID = :ID_package");
+        query.bindValue(":ID_package", ID_package);
+        query.exec();
+        QSqlQuery query1;
+        int buyed_package_id = (UsingDataBase::findBiggestIdOfBuyedPackage() + 1);
+        query1.prepare("INSERT INTO Buyed_packages VALUES(:buyed_package_id, :ID_package, :Email_user, :Quantity_of_packages)");
+        query1.bindValue(":buyed_package_id", buyed_package_id);
+        query1.bindValue(":ID_package", ID_package);
+        query1.bindValue(":Email_user", Email_user);
+        query1.bindValue(":Quantity_of_packages", Quantity_of_packages);
+        query1.exec();
+        return true;
+    }
+    return false;
+}
+
+int UsingDataBase::findBiggestIdOfBuyedPackage()
+{
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM Buyed_packages");
+    if(query.exec() && query.first())
+    {
+        int count = query.value(0).toInt();
+        return count;
+    }
+    else
+    {
+        return 1;
     }
 }
 

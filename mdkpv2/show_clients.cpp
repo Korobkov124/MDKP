@@ -33,6 +33,8 @@ void Show_clients::on_Search_button_clicked()
         QString Email = ui->Email_field->text();
         package_model = new BuyedPackagesModel(Email);
         ui->tableView->setModel(package_model);
+        int Discaunt = package_model->totalPurchasesForClient(Email);
+        ui->label_3->setText("Total discaunt of the client is " + QString::number(Discaunt) + "%!");
     }
 }
 

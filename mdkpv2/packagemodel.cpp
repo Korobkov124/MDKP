@@ -83,6 +83,7 @@ QVariant packagemodel::headerData(int section, Qt::Orientation orientation, int 
     return {};
 }
 
+
 bool packagemodel::addPackage(const packageclass &newPackage)
 {
     beginInsertRows(QModelIndex(), m_packages.size(), m_packages.size());
@@ -100,4 +101,9 @@ bool packagemodel::updateData()
     m_packages = Base.getAllPackages();
     endResetModel();
     return true;
+}
+
+int packagemodel::getPackageID(int row, const QModelIndex &parent) const
+{
+    return m_packages[row].ID;
 }

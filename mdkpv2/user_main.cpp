@@ -26,7 +26,7 @@ void User_main::on_Quit_button_clicked()
 
 void User_main::on_History_button_clicked()
 {
-    buyed_hist = new Buyed_history(this);
+    buyed_hist = new Buyed_history(Client);
     buyed_hist -> show();
 
 }
@@ -34,7 +34,7 @@ void User_main::on_History_button_clicked()
 
 void User_main::on_Show_button_clicked()
 {
-    buying_pckg = new Buying_package(this);
+    buying_pckg = new Buying_package(Client);
     buying_pckg -> show();
 }
 

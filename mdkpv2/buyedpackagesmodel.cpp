@@ -77,3 +77,27 @@ QVariant BuyedPackagesModel::headerData(int section, Qt::Orientation orientation
     return {};
 }
 
+int BuyedPackagesModel::totalPurchasesForClient(const QString &clientEmail) const
+{
+    int totalPurchases = 0;
+    for (const auto &package : m_BuyedPackages)
+    {
+        if (package.Email_user == clientEmail)
+        {
+            totalPurchases += package.Quantity_of_packages;
+        }
+    }
+    if (totalPurchases == 0)
+    {
+        return 15;
+    }
+    if (totalPurchases < 10)
+    {
+        return 5;
+    }
+    else
+    {
+        return 10;
+    }
+}
+

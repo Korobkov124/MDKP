@@ -18,6 +18,7 @@ SOURCES += \
     change_info.cpp \
     change_packages.cpp \
     clientsmodel.cpp \
+    confirm_package.cpp \
     employee_main.cpp \
     employees_class.cpp \
     main.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     change_info.h \
     change_packages.h \
     clientsmodel.h \
+    confirm_package.h \
     employee_main.h \
     employees_class.h \
     mainwindow.h \
@@ -62,6 +64,7 @@ FORMS += \
     change_employes.ui \
     change_info.ui \
     change_packages.ui \
+    confirm_package.ui \
     employee_main.ui \
     mainwindow.ui \
     registration.ui \

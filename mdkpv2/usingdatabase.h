@@ -34,6 +34,8 @@ public:
     static QVector<BuyedPackageClass> getBuyedPackages(QString Email);
     static QVector<QString> getCountryHotelTotalCost(int ID);
     static bool getPasswordFromDB(QString Password);
+    static bool getPackageBuyed(int ID_package, QString Email_user, int Quantity_of_packages);
+    static int findBiggestIdOfBuyedPackage();
 };
 
 #endif // USINGDATABASE_H

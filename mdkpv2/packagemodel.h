@@ -17,6 +17,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     bool addPackage(const packageclass& newPackage);
     bool updateData();
+    int getPackageID(int row, const QModelIndex &parent) const;
 private:
     QVector<packageclass> m_packages;
 };

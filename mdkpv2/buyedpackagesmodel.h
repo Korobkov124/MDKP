@@ -15,7 +15,7 @@ public:
     int columnCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
-
+    int totalPurchasesForClient(const QString &clientEmail) const;
 private:
     QVector<BuyedPackageClass> m_BuyedPackages;
     QString clientEmail;
