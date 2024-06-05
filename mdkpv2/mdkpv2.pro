@@ -20,7 +20,6 @@ SOURCES += \
     clientsmodel.cpp \
     confirm_package.cpp \
     employee_main.cpp \
-    employees_class.cpp \
     main.cpp \
     mainwindow.cpp \
     packagemodel.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     clientsmodel.h \
     confirm_package.h \
     employee_main.h \
-    employees_class.h \
     mainwindow.h \
     packageclass.h \
     packagemodel.h \
