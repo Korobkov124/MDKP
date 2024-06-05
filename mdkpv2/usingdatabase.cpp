@@ -18,6 +18,22 @@ void UsingDataBase::DataBaseConnection()
     {
         qDebug() << "DataBase is open!";
     }
+    if (!db.tables().contains("Users"))
+    {
+        QSqlQuery query;
+        query.exec("CREATE TABLE Users (name TEXT, Email TEXT PRIMARY KEY, Phone TEXT, Password TEXT, Role TEXT, Display_mode INTEGER);");
+        query.exec("INSERT INTO Users VALUES('Andrey', 'RKN@mail.ru', '+7(902)9705032', 'Kirill123', 'moder', 1)");
+    }
+    if (!db.tables().contains("Packages"))
+    {
+        QSqlQuery query;
+        query.exec("CREATE TABLE Packages (Country TEXT, Hotel TEXT, Cost_for_week INTEGER, Week_cast INTEGER, Packages_cast INTEGER, ID INTEGER PRIMARY KEY, Display_mode  INTEGER);");
+    }
+    if (!db.tables().contains("Buyed_packages"))
+    {
+        QSqlQuery query;
+        query.exec("CREATE TABLE Buyed_packages (ID INTEGER PRIMARY KEY, ID_package INTEGER REFERENCES Packages (ID), Email_user TEXT REFERENCES Users (Email), Quantity_of_packages INTEGER);");
+    }
 }
 
 QVector<packageclass> UsingDataBase::getAllPackages()
@@ -84,11 +100,7 @@ bool UsingDataBase::takePackageToDB(packageclass object)
     query.bindValue(":ID", object.ID);
     query.bindValue(":Display_mode", 1);
     query.exec();
-    query.finish();
-    if(true)
-    {
-        return true;
-    }
+    return true;
 }
 
 bool UsingDataBase::getEmailFromDB(QString Email)
