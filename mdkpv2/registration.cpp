@@ -11,8 +11,8 @@ registration::registration(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::registration),
     name_validator(QRegularExpression("^[A-Z]{1}[a-z]{15}$")),
-    phone_validator(QRegularExpression("^\\+\\d{1,1}\\(\\d{3,5}\\)\\d{2,7}$")),
     email_validator(QRegularExpression("^.{30}+@(mail\\.ru|outlook\\.com)$")),
+    phone_validator(QRegularExpression("^\\+\\d{1,1}\\(\\d{3,5}\\)\\d{2,7}$")),
     password_validator(QRegularExpression("^.{30}$"))
 {
     ui->setupUi(this);
@@ -42,7 +42,7 @@ void registration::on_Registrate_button_clicked()
     QString Phone = ui->Phone_field->text();
     QString Password = ui->Password_field->text();
     QString Confirm = ui->Confirm_field->text();
-    if ((Password == Confirm) && !(UsingDataBase::getEmailFromDB(Email)))
+    if ((Password == Confirm) && !(UsingDataBase::getEmailFromDB(Email)) && (Password.length() == 14))
     {
         UsersClass user;
         user.Name = Name;

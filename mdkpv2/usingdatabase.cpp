@@ -22,7 +22,7 @@ void UsingDataBase::DataBaseConnection()
     {
         QSqlQuery query;
         query.exec("CREATE TABLE Users (name TEXT, Email TEXT PRIMARY KEY, Phone TEXT, Password TEXT, Role TEXT, Display_mode INTEGER);");
-        query.exec("INSERT INTO Users VALUES('Andrey', 'RKN@mail.ru', '+7(902)9705032', 'Kirill123', 'moder', 1)");
+        query.exec("INSERT INTO Users VALUES('Andrey', 'RKN@mail.ru', '+7(902)9705032', 'Kirill123', 'admin', 1)");
     }
     if (!db.tables().contains("Packages"))
     {

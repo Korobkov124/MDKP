@@ -51,7 +51,7 @@ void Change_employes::on_Add_button_clicked()
     user.Phone = ui->Phone_field->text();
     user.Password = ui->Password_field->text();
     user.Role = ui->Role_field->text();
-    if (!UsingDataBase::getEmailFromDB(ui->Email_field->text()) && user.Email != "" && user.Name != "" && user.Phone != "" && user.Password != "" && user.Role != "")
+    if (!UsingDataBase::getEmailFromDB(ui->Email_field->text()) && user.Email != "" && user.Name != "" && user.Phone != "" && user.Password != "" && user.Role != "" && user.Password.length() == 14)
     {
         UsingDataBase::takeUserToDB(user);
         if (employee_model->addUser(user))
