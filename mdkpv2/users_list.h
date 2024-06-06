@@ -17,7 +17,7 @@ public:
     ~Users_list();
 
 private slots:
-    void on_Registration_button_clicked();
+    void on_Quit_button_clicked();
 
 private:
     Ui::Users_list *ui;

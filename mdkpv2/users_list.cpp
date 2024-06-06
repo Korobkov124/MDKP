@@ -15,7 +15,7 @@ Users_list::~Users_list()
     delete ui;
 }
 
-void Users_list::on_Registration_button_clicked()
+void Users_list::on_Quit_button_clicked()
 {
     close();
 }

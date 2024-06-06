@@ -21,15 +21,15 @@ public:
     ~Admin_main();
 
 private slots:
-    void on_Autorisation_button_4_clicked();
+    void on_Quit_button_clicked();
 
-    void on_Autorisation_button_clicked();
+    void on_Change_button_clicked();
 
-    void on_Autorisation_button_2_clicked();
+    void on_History_button_clicked();
 
-    void on_Autorisation_button_3_clicked();
+    void on_Show_button_clicked();
 
-    void on_Autorisation_button_5_clicked();
+    void on_Changemp_button_clicked();
 
 protected:
     void closeEvent(QCloseEvent *event);
